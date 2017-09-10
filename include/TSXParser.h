@@ -9,24 +9,27 @@
 #include <rapidxml/rapidxml.hpp>
 #include <rapidxml/rapidxml_utils.hpp>
 
-namespace TSX {
-  class Parser
-  {
-    public:
-      Parser( const char* filename );
-      Parser();
-      virtual ~Parser();
+namespace TSX
+{
+class Parser
+{
+public:
+    Parser( const char* filename );
+    Parser();
+    virtual ~Parser();
 
-      bool load( const char* filename );
+    bool load( const char* filename );
 
-      struct TilesetImage {
+    struct TilesetImage
+    {
         std::string source;
         std::string transparentColor;
         unsigned int width;
         unsigned int height;
-      };
+    };
 
-      struct Tileset {
+    struct Tileset
+    {
         std::string name;
         unsigned int tileWidth;
         unsigned int tileHeight;
@@ -38,23 +41,34 @@ namespace TSX {
         std::map<std::string, std::string> property;
 
         TilesetImage image;
-      };
+    };
 
-      struct Terrain {
+    struct Terrain
+    {
         std::string name;
         unsigned int tile;
         std::map<std::string, std::string> property;
-      };
+    };
 
-      struct Tile {
+    struct Image
+    {
+        std::string name;
+        unsigned int witdh;
+        unsigned int height;
+    };
+
+    struct Tile
+    {
         unsigned int id;
+        std::string type;
+        Image img;
         std::vector<unsigned int> terrain;
         std::map<std::string, std::string> property;
-      };
+    };
 
-      Tileset tileset;
-      std::vector<Terrain> terrainList;
-      std::vector<Tile> tileList;
-  };
+    Tileset tileset;
+    std::vector<Terrain> terrainList;
+    std::vector<Tile> tileList;
+};
 }
 #endif // TSXPARSER_H
